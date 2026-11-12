@@ -235,3 +235,21 @@ label{font-size:.84rem;font-weight:600;color:var(--muted)}
   .sheet{align-items:center}
   .sheet-card{border-radius:20px;max-height:86dvh}
 }
+
+/* ilustraciones y movimiento */
+.art{width:100%;height:auto;display:block;color:var(--ink)}
+.art .ink{stroke:currentColor;stroke-width:1.300;stroke-linecap:round;stroke-linejoin:round}
+.art .acc{stroke:var(--terra);stroke-width:2}
+.art.hero .ink{stroke-width:1.100}
+.art-band{background:var(--stone);border-radius:12px;padding:12px 14px 0;overflow:hidden}
+.art-band.bleed{margin:-18px -18px 2px;border-radius:13px 13px 0 0}
+#sheet-body>.art-band{margin:-4px 0 -4px}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:no-preference){
+  .enter .art .ink,.sheet .art .ink{stroke-dasharray:1;animation:draw 1.800s cubic-bezier(.3,.6,.3,1) both}
+  .enter>*{animation:rise .38s ease-out both}
+  .enter>*:nth-child(2){animation-delay:.05s}.enter>*:nth-child(3){animation-delay:.1s}.enter>*:nth-child(4){animation-delay:.15s}.enter>*:nth-child(n+5){animation-delay:.2s}
+  .btn,.chip,.days button{transition:transform .12s ease,background-color .15s ease}
+  .btn:active,.chip:active,.days button:active,.stop:active .nm{transform:scale(.97)}
+}

@@ -153,8 +153,8 @@
     const ph = phase(), dayId = activeDay();
     if (!dayId) {
       const n = romeNow(), left = dayDiff(T.start, n.date), doneN = RN.prep.filter(p => state.prep[p.id]).length;
-      if (ph === 'despues') return '<section class="cover"><span class="eyebrow">13–16 de noviembre de 2026</span><h1>Arrivederci, <em>Roma.</em></h1>' + ARCHES + '<p class="lede">El viaje ha terminado. Vuestro diario y lo que marcasteis siguen aquí, en la pestaña Guía.</p></section><section class="sec"><span class="eyebrow">Volver a ver un día</span>' + previewChips() + '</section>';
-      return '<section class="cover"><span class="eyebrow">13–16 de noviembre · dos viajeros</span><h1>Roma <em>Nostra.</em></h1>' + ARCHES +
+      if (ph === 'despues') return '<section class="cover"><span class="eyebrow">13–16 de noviembre de 2026</span><h1>Arrivederci, <em>Roma.</em></h1>' + RN.art.svg('cover', 'hero') + '<p class="lede">El viaje ha terminado. Vuestro diario y lo que marcasteis siguen aquí, en la pestaña Guía.</p></section><section class="sec"><span class="eyebrow">Volver a ver un día</span>' + previewChips() + '</section>';
+      return '<section class="cover"><span class="eyebrow">13–16 de noviembre · dos viajeros</span><h1>Roma <em>Nostra.</em></h1>' + RN.art.svg('cover', 'hero') +
         '<div class="count"><b>' + (left <= 0 ? 'Hoy' : left) + '</b><span>' + (left === 1 ? 'día para salir. Mañana por la noche dormís en Roma.' : left <= 0 ? 'es el día.' : 'días para salir.') + '</span></div></section>' +
         '<section class="sec"><div class="row" style="justify-content:space-between"><h2>Antes de salir</h2><span class="small num">' + doneN + ' de ' + RN.prep.length + '</span></div><div class="card" style="gap:0;padding-block:4px">' + prepList() + '</div></section>' +
         '<section class="sec"><h2>El tiempo que os espera</h2>' + wx4() + '</section>' +
@@ -170,7 +170,7 @@
     h += fixedBanner(dayId, nm);
     if (cur) {
       const t = sMin(cur), rel = nm == null ? '' : nm < t - 1 ? 'Empieza en ' + dur(t - nm) : nm <= t + cur.dur ? 'En curso' : 'Vais ' + dur(nm - t - cur.dur) + ' por detrás del plan';
-      h += '<section class="now"><div class="row" style="justify-content:space-between"><span class="eyebrow">' + (nm != null && nm >= t ? 'Ahora' : 'Siguiente') + ' · ' + fmt(t) + '</span>' + pill(cur.status) + '</div><h2>' + esc(cur.name) + '</h2>' +
+      h += '<section class="now"><div class="art-band bleed">' + RN.art.stop(cur.id) + '</div><div class="row" style="justify-content:space-between"><span class="eyebrow">' + (nm != null && nm >= t ? 'Ahora' : 'Siguiente') + ' · ' + fmt(t) + '</span>' + pill(cur.status) + '</div><h2>' + esc(cur.name) + '</h2>' +
         (rel ? '<div class="when">' + rel + '</div>' : '') + '<p>' + esc(cur.brief) + '</p><div class="btns">' +
         '<button class="btn pri" data-act="stop" data-id="' + cur.id + '">Ya estamos aquí</button>' +
         '<a class="btn" target="_blank" rel="noopener" href="' + gdir(stopQ(cur), cur.kind === 'logistica' && cur.hotel ? 'transit' : 'walking') + '">Ir ahora</a>' +
@@ -195,7 +195,7 @@
   const dur = m => { m = Math.max(0, Math.round(m)); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + (m % 60 ? pad(m % 60) + ' min' : ''); };
 
   function fixedBanner(dayId, nm) {
-    const fx = pending(dayId).filter(s => s.fixed && s.kind !== 'logistica' || (s.fixed && dayId === 'lun'))[0];
+    const fx = pending(dayId).filter(s => (s.fixed && s.kind !== 'logistica' || (s.fixed && dayId === 'lun')) && (nm == null || sMin(s) >= nm - 10))[0];
     if (!fx) return '';
     const t = sMin(fx), lead = fx.lead || 0, left = nm == null ? null : t - lead - nm;
     const alert = left != null && left < 45;
@@ -216,7 +216,7 @@
   function vPlan() {
     const dayId = state.planDay || activeDay() || 'sab', d = dayById[dayId], nmP = nowMin(dayId); let cur = pending(dayId)[0]; if (nmP != null) pending(dayId).forEach(x => { if (sMin(x) <= nmP + 5) cur = x; });
     return '<div class="days">' + RN.days.map(x => '<button data-act="planday" data-id="' + x.id + '" aria-pressed="' + (x.id === dayId) + '">' + x.short + '<small>' + x.date.slice(8) + ' nov</small></button>').join('') + '</div>' +
-      '<section class="sec" style="gap:6px"><span class="eyebrow t">' + esc(d.label) + '</span><h1 class="h-day">' + titleEm(d.title) + '</h1><p class="lede">' + esc(d.intro) + '</p></section>' +
+      '<section class="sec" style="gap:6px"><span class="eyebrow t">' + esc(d.label) + '</span><h1 class="h-day">' + titleEm(d.title) + '</h1><p class="lede">' + esc(d.intro) + '</p></section><div class="art-band">' + RN.art.day(dayId) + '</div>' +
       '<section class="tl">' + dayStops(dayId).map(s => stopRow(s, cur && cur.id)).join('') + '</section>' +
       '<section class="card"><span class="eyebrow">Si llueve</span><p>' + esc(d.rain) + '</p></section>' +
       '<div class="btns"><button class="btn" data-act="mapday" data-id="' + dayId + '">Ver en el mapa</button><button class="btn" data-act="resetday" data-id="' + dayId + '">Reiniciar el día</button></div>' +
@@ -265,7 +265,7 @@
   function stopSheet(id) {
     const s = byId[id], d = dayById[s.day], t = sMin(s);
     const eat = (s.eat || []).map(k => foodById[k]).filter(Boolean);
-    openSheet('<div class="blk" style="gap:8px"><div class="row"><span class="eyebrow t">' + esc(d.label) + ' · ' + fmt(t) + (s.dur ? '–' + fmt(t + s.dur) : '') + '</span>' + pill(s.status) + '</div><h2 id="sheet-title">' + esc(s.name) + '</h2><p>' + esc(s.brief) + '</p>' + (s.cost ? '<p class="small">' + esc(s.cost) + '</p>' : '') + '</div>' +
+    openSheet('<div class="art-band">' + RN.art.stop(s.id) + '</div><div class="blk" style="gap:8px"><div class="row"><span class="eyebrow t">' + esc(d.label) + ' · ' + fmt(t) + (s.dur ? '–' + fmt(t + s.dur) : '') + '</span>' + pill(s.status) + '</div><h2 id="sheet-title">' + esc(s.name) + '</h2><p>' + esc(s.brief) + '</p>' + (s.cost ? '<p class="small">' + esc(s.cost) + '</p>' : '') + '</div>' +
       (s.warn ? '<div class="warn"><b>Atención.</b> ' + esc(s.warn) + '</div>' : '') +
       '<div class="btns"><a class="btn pri" target="_blank" rel="noopener" href="' + gdir(stopQ(s), 'walking') + '">Ir ahora</a>' + (s.lat || s.hotel ? '<button class="btn" data-act="fly" data-id="' + s.id + '">Ver en 3D</button>' : '') + '</div>' +
       (s.story ? '<div class="audio"><button class="btn sm dark" data-act="play" data-id="' + s.id + '">▶ Escuchar</button><button class="btn sm" data-act="pause">Pausa</button><button class="btn sm" data-act="stopaudio">Parar</button><button class="btn sm" data-act="rate">Velocidad ' + state.rate + '×</button><span class="small" id="audio-st">Voz del teléfono. ' + Math.max(1, Math.round(s.story.split(' ').length / 150)) + ' min.</span></div>' : '') +
@@ -282,7 +282,7 @@
   }
   function foodSheet(id) {
     const f = foodById[id];
-    openSheet('<div class="blk" style="gap:8px"><div class="row"><span class="eyebrow t">' + esc(f.type) + ' · ' + esc(f.zone) + '</span><span class="pill">Sin reserva hecha</span></div><h2 id="sheet-title">' + esc(f.name) + '</h2><p>' + esc(f.why) + '</p></div>' +
+    openSheet('<div class="art-band">' + RN.art.food(f.type) + '</div><div class="blk" style="gap:8px"><div class="row"><span class="eyebrow t">' + esc(f.type) + ' · ' + esc(f.zone) + '</span><span class="pill">Sin reserva hecha</span></div><h2 id="sheet-title">' + esc(f.name) + '</h2><p>' + esc(f.why) + '</p></div>' +
       (f.but ? '<div class="warn"><b>A tener en cuenta.</b> ' + esc(f.but) + '</div>' : '') +
       '<dl class="kv"><dt>Pedid</dt><dd>' + esc(f.order) + '</dd><dt>Precio</dt><dd>' + esc(f.pp) + ' por persona, orientativo</dd><dt>Horario</dt><dd>' + esc(f.hours) + '</dd><dt>Reserva</dt><dd>' + esc(f.reserve) + '</dd><dt>Dirección</dt><dd>' + esc(f.addr) + '</dd>' + (f.tel ? '<dt>Teléfono</dt><dd><a href="tel:' + f.tel.replace(/\s/g, '') + '">' + esc(f.tel) + '</a></dd>' : '') + '<dt>Encaja</dt><dd>' + esc(f.when) + '</dd></dl>' +
       '<p class="small">Horario comprobado el ' + esc(T.verified) + '. Confirmadlo el mismo día.</p>' +
@@ -466,7 +466,8 @@
 
   /* ───── acciones ───── */
   let toastT; function toast(t) { const e = $('#toast'); e.textContent = t; e.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { e.hidden = true; }, 2600); }
-  function go(tab) { state.tab = tab; save(); closeSheet(); render(); window.scrollTo(0, 0); }
+  function go(tab) { state.tab = tab; save(); closeSheet(); render(); window.scrollTo(0, 0); enter(); }
+  function enter() { view.classList.remove('enter'); void view.offsetWidth; view.classList.add('enter'); }
   function exportDiary() {
     const txt = 'ROMA NOSTRA · diario\n\n' + RN.days.map(d => d.label.toUpperCase() + '\n' + dayStops(d.id).map(s => (state.done[s.id] ? '[x] ' : state.skip[s.id] ? '[-] ' : '[ ] ') + s.t + ' ' + s.name + (state.notes[s.id] ? '\n     ' + state.notes[s.id] : '')).join('\n')).join('\n\n') + '\n\nHALLAZGO DEL VIAJE\n' + (state.notes._viaje || '—') + '\n\nPROBADO\n' + RN.musts.filter(m => state.musts[m.id]).map(m => m.name).join(', ');
     if (navigator.share) { navigator.share({ title: 'Roma Nostra · diario', text: txt }).catch(() => { }); return; }
@@ -492,8 +493,8 @@
       case 'skip': state.skip[id] ? delete state.skip[id] : (state.skip[id] = true); save(); closeSheet(); render(); return;
       case 'prep': state.prep[id] ? delete state.prep[id] : (state.prep[id] = true); save(); b.setAttribute('aria-checked', !!state.prep[id]); return;
       case 'must': state.musts[id] ? delete state.musts[id] : (state.musts[id] = true); save(); b.setAttribute('aria-checked', !!state.musts[id]); return;
-      case 'preview': state.preview = id; save(); render(); window.scrollTo(0, 0); return;
-      case 'planday': state.planDay = id; save(); return render();
+      case 'preview': state.preview = id; save(); render(); window.scrollTo(0, 0); return enter();
+      case 'planday': state.planDay = id; save(); render(); return enter();
       case 'zone': state.zone = id; save(); return render();
       case 'wx': toast('Actualizando el tiempo…'); return fetchWx(true);
       case 'late': return lateSheet();
@@ -537,7 +538,7 @@
   document.addEventListener('visibilitychange', () => { if (!document.hidden) { fetchWx(); if (state.tab !== 'mapa' && sheet.hidden) render(); } });
 
   if (state.preview && phase() === 'viaje') state.preview = '';
-  applyPrefs(); render(); fetchWx();
+  applyPrefs(); render(); enter(); fetchWx();
   if ('serviceWorker' in navigator && location.protocol === 'https:' || location.hostname === 'localhost') navigator.serviceWorker && navigator.serviceWorker.register('sw.js').catch(() => { });
   window.__rn = { state, replan, romeNow, render };
 })();

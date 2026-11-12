@@ -1,7 +1,7 @@
 /* Roma Nostra · funcionamiento sin conexión.
    Precarga la app completa; el tiempo va primero a la red; las teselas del mapa se guardan según se ven. */
-const V = 'rn-v1';
-const SHELL = ['./', 'index.html', 'bolsillo.html', 'css/app.css', 'js/data.js', 'js/app.js', 'vendor/maplibre-gl.js', 'vendor/maplibre-gl.css',
+const V = 'rn-v2';
+const SHELL = ['./', 'index.html', 'bolsillo.html', 'css/app.css', 'js/data.js', 'js/art.js', 'js/app.js', 'vendor/maplibre-gl.js', 'vendor/maplibre-gl.css',
   'fonts/fraunces-latin-wght-normal.woff2', 'fonts/fraunces-latin-wght-italic.woff2', 'fonts/instrument-sans-latin-wght-normal.woff2',
   'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png',
   'exports/roma-nostra.kml', 'exports/roma-nostra.csv', 'exports/roma-nostra-sabado.gpx', 'exports/roma-nostra-domingo.gpx', 'exports/roma-nostra-lunes.gpx', 'exports/roma-nostra-bolsillo.pdf'];
