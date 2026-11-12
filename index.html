@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roma Nostra</title>
+<meta name="description" content="Guía privada de viaje a Roma, 13–16 de noviembre de 2026.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F7F2E9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1B1A17" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Roma Nostra">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preload" href="fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/instrument-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="vendor/maplibre-gl.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+  <header id="top">
+    <div class="brand"><span class="brand-a">Roma</span> <span class="brand-b">Nostra</span></div>
+    <div id="net" class="net" hidden>Sin conexión</div>
+    <div id="clock" class="clock" aria-live="off"></div>
+  </header>
+
+  <main id="view" tabindex="-1"></main>
+
+  <nav id="tabs" aria-label="Secciones">
+    <button data-tab="hoy" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg><span>Hoy</span></button>
+    <button data-tab="plan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v16M6 6h.01M6 12h.01M6 18h.01M11 6h8M11 12h8M11 18h8"/></svg><span>Plan</span></button>
+    <button data-tab="mapa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4L3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4zM9 4v13.5M15 6.5V20"/></svg><span>Mapa</span></button>
+    <button data-tab="comer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8M4.5 3v5a2.5 2.5 0 005 0V3M7 11v10M17 3c-2 1.500-3 4-3 7h3M17 3v18"/></svg><span>Comer</span></button>
+    <button data-tab="guia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.500A2.500 2.500 0 016.5 3H20v15H6.5A2.500 2.500 0 004 20.500v-15zM4 20.500A2.500 2.500 0 006.5 23H20v-5"/></svg><span>Guía</span></button>
+  </nav>
+</div>
+
+<div id="mapwrap" hidden>
+  <div id="map"></div>
+  <div class="mapbar" id="mapbar"></div>
+  <div class="mapnote" id="mapnote" hidden></div>
+</div>
+
+<div id="sheet" class="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+  <div class="sheet-bg" data-close></div>
+  <div class="sheet-card">
+    <button class="sheet-x" data-close aria-label="Cerrar">×</button>
+    <div id="sheet-body"></div>
+  </div>
+</div>
+<div id="toast" class="toast" hidden role="status"></div>
+
+<script defer src="vendor/maplibre-gl.js"></script>
+<script defer src="js/data.js"></script>
+<script defer src="js/app.js"></script>
+</body>
+</html>
