@@ -18,7 +18,7 @@
   function applyPrefs() {
     const r = document.documentElement;
     state.size ? r.setAttribute('data-size', state.size) : r.removeAttribute('data-size');
-    state.theme ? r.setAttribute('data-theme', state.theme) : r.removeAttribute('data-theme');
+    if (!window.RN_ARTIFACT) state.theme ? r.setAttribute('data-theme', state.theme) : r.removeAttribute('data-theme');
   }
 
   /* ───── reloj: siempre hora de Roma ───── */
@@ -419,6 +419,7 @@
   }
   function mapFail() {
     const n = $('#mapnote'); n.hidden = false;
+    if (window.RN_ARTIFACT) { n.innerHTML = '<b>El mapa 3D no está en esta vista previa.</b><span class="small">Funciona en la versión instalada desde GitHub Pages. Aquí, cada parada abre Google Maps con «Ir ahora».</span><div class="btns"><button class="btn sm wide" data-act="tab" data-id="plan">Ir al plan</button></div>'; return; }
     n.innerHTML = '<b>El mapa 3D necesita conexión.</b><span class="small">Mientras tanto, cada parada abre Google Maps (que sí funciona sin red si descargasteis Roma).</span><div class="btns"><button class="btn sm" data-act="mapretry">Reintentar</button><button class="btn sm" data-act="tab" data-id="plan">Ir al plan</button></div>';
   }
   function renderMapbar() {
