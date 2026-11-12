@@ -92,13 +92,13 @@ window.RN = (function () {
       tip: 'Armando al Pantheon es la mesa buena de la zona pero sin reserva es casi imposible. Llamad hoy. Si no hay sitio, Da Gino al Parlamento o, en versión rápida, pizza bianca rellena en Lo Zozzone. Después, café en Sant’Eustachio.',
       eat: ['armando', 'gino', 'zozzone', 'eustachio', 'tazzadoro'] },
     { id: 's7', day: 'sab', t: '14:00', dur: 40, name: 'Panteón', kind: 'monumento', p: 1, audio: true,
-      lat: 41.8986, lng: 12.4769, q: 'Pantheon, Piazza della Rotonda, Roma', status: 'PENDIENTE', cost: 'De pago (5 €, posible subida a 7 € desde julio 2026: verificar)',
-      brief: 'El edificio antiguo mejor conservado de Roma. En fin de semana hay que reservar franja horaria.',
+      lat: 41.8986, lng: 12.4769, q: 'Pantheon, Piazza della Rotonda, Roma', status: 'PENDIENTE', cost: '7 € por persona (2 € de 18 a 25 años, gratis menores de 18)',
+      brief: 'El edificio antiguo mejor conservado de Roma. Comprad la entrada en línea para saltaros la cola de taquilla.',
       look: ['El óculo: nueve metros de cielo abierto, sin cristal', 'El suelo ligeramente abombado, con 22 agujeros por donde se va la lluvia', 'La tumba de Rafael, a la izquierda, bajo una Virgen'],
       story: 'Leed la inscripción del frontón: «Marco Agripa, hijo de Lucio, lo hizo en su tercer consulado». Es verdad a medias. El templo de Agripa ardió, y lo que veis lo reconstruyó el emperador Adriano hacia el año 125. Tuvo el gesto raro de no poner su nombre. Las columnas del pórtico son de una sola pieza: granito traído de Egipto, doce metros cada una, arrastradas por el desierto, bajadas por el Nilo y cruzadas por mar. Ahora entrad y mirad arriba. La cúpula mide 43 metros de diámetro y exactamente lo mismo de altura: dentro cabría una esfera perfecta. Es de hormigón sin armar, y diecinueve siglos después sigue siendo la mayor del mundo hecha así. El truco está en el material: abajo, piedra pesada mezclada en el hormigón; arriba, piedra pómez, casi espuma. El óculo no es un adorno, es la clave que aligera el punto más débil. Cuando llueve, llueve dentro, y el agua se va por los agujeros del suelo. Si sigue en pie es porque en el año 609 se convirtió en iglesia, y a las iglesias no se las desmontaba para aprovechar la piedra. Miguel Ángel dijo que parecía obra de ángeles y no de hombres. Rafael pidió ser enterrado aquí. Lo encontraréis a la izquierda.',
       fact: 'El papa Urbano VIII Barberini mandó fundir el bronce del pórtico. De ahí el dicho romano: «Lo que no hicieron los bárbaros lo hicieron los Barberini».',
       photo: 'Dentro, desde el centro exacto, mirando al óculo. Fuera, desde la fuente de la plaza con el obelisco en primer plano. Hacia las 14:00 el rayo de sol cae sobre la pared norte.',
-      tip: 'Reservad hoy la franja de las 14:00 en el canal oficial. Si no lo conseguís, el exterior y el pórtico son gratis y ya impresionan.',
+      tip: 'Entrada en línea en Musei Italiani (web o app), franja de las 14:00. También se vende en la taquilla de la plaza, con cola. Sed puntuales con la franja. El exterior y el pórtico son gratis.',
       short: 'Entrad, id al centro, mirad arriba un minuto entero y buscad a Rafael.',
       warn: 'Los domingos hay misa de 12 a 13 y no se visita.', eat: ['eustachio', 'tazzadoro', 'giolitti'] },
     { id: 's8', day: 'sab', t: '14:45', dur: 25, name: 'Sant’Ignazio', kind: 'monumento', p: 2, audio: true,
@@ -369,7 +369,7 @@ window.RN = (function () {
   const prep = [
     { id: 'p1', t: 'Tener a mano las dos entradas del Coliseo (domingo 14:30) y un documento cada uno', why: 'Confirmado: hay dos entradas. Son nominativas.' },
     { id: 'p2', t: 'Viernes antes de las 13:30: recibir las instrucciones de entrada del alojamiento', why: 'La recepción cierra a las 13:30. Las envían por WhatsApp o por el chat de la reserva. Hacedles captura antes de volar.' },
-    { id: 'p3', t: 'Reservar franja del Panteón: sábado 14:00', why: 'En fin de semana la reserva es obligatoria. Canal oficial: Musei Italiani.' },
+    { id: 'p3', t: 'Comprar entradas del Panteón: sábado 14:00, 7 € cada una', why: 'En línea en Musei Italiani (portale.museiitaliani.it). Evita la cola de taquilla del sábado.' },
     { id: 'p4', t: 'Llamar a Armando al Pantheon (sábado 12:30) y a Matricianella (sábado 20:00)', why: 'Encargado a Javi. Los dos cierran el domingo. Si Armando no tiene mesa, Da Gino.' },
     { id: 'p5', t: 'Reservar La Taverna dei Fori Imperiali: domingo 12:15', why: 'Encargado a Javi. Hay que salir a las 13:40 hacia el Coliseo.' },
     { id: 'p6', t: 'Check-in en la app de Wizz Air y tarjetas de embarque en el móvil (ida y vuelta)', why: 'El check-in en línea se cierra 3 horas antes de cada vuelo; en el aeropuerto se cobra. El de la vuelta, hacedlo el domingo por la noche.' },
@@ -428,7 +428,7 @@ window.RN = (function () {
     ['Domingo', 'Campidoglio a la puesta de sol, con la terraza sobre el Foro. Cruce a Trastevere por la Isla Tiberina, más corto y más bonito que Ponte Sisto desde el Gueto.'],
     ['Domingo', 'Cena: Ai Marmi a las 19:00 o, si hay hambre antes, cocina judeorromana en el Gueto, que el domingo abre seguro. Da Enzo descartado: cierra los domingos.'],
     ['Lunes', 'Comida para llevar en el Mercato Centrale de Termini, pegado al andén del Leonardo Express. Límites claros: fuera del Vaticano a las 13:00, taxi directo si pasan las 13:45.'],
-    ['Datos nuevos', 'Trevi: desde febrero de 2026 bajar junto al agua cuesta 2 €. Panteón: reserva obligatoria en fin de semana. Museos Vaticanos: guardarropa para bolsas de más de 40 × 35 × 15 cm.']
+    ['Datos nuevos', 'Trevi: desde febrero de 2026 bajar junto al agua cuesta 2 €. Panteón: la entrada cuesta 7 € desde julio de 2026. Museos Vaticanos: guardarropa para bolsas de más de 40 × 35 × 15 cm.']
   ];
 
   const sources = [
