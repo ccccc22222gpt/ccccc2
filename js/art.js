@@ -114,8 +114,8 @@
       `M258 20a14 14 0 1 0 14 22a18 18 0 0 1 -14 -22z` + rep(4, i => circle(40 + i * 14, 18 + ((i * 7) % 20), 1.500)) + pine(52, 76)
   };
 
-  const BY_STOP = { v1: 'plane', v2: 'taxi', v3: 'hotel', s1: 'metro', s2: 'stpeter', s3: 'castel', s4: 'coronari', s5: 'navona', s6: 'food', s7: 'pantheon', s8: 'ignazio', s9: 'trevi', s10: 'spagna', s11: 'pincio', s12: 'popolo', s13: 'food',
-    d1: 'metro', d2: 'forum', d3: 'palatine', d4: 'food', d5: 'colosseum', d6: 'colosseum', d7: 'campidoglio', d8: 'ghetto', d9: 'trastevere', d10: 'food', l1: 'hotel', l2: 'cafe', l3: 'vatican', l4: 'vatican', l5: 'metro', l6: 'train', l7: 'plane', l8: 'plane' };
+  const BY_STOP = { v1: 'plane', v2: 'taxi', v3: 'hotel', s1: 'spagna', s2: 'stpeter', s3: 'castel', s4: 'coronari', s5: 'navona', s6: 'food', s7: 'pantheon', s8: 'ignazio', s9: 'trevi', s10: 'spagna', s11: 'castel', s12: 'trastevere', s13: 'food',
+    d1: 'forum', d2: 'forum', d3: 'palatine', d4: 'food', d5: 'colosseum', d6: 'colosseum', d7: 'campidoglio', d8: 'ghetto', d9: 'trastevere', d10: 'food', l1: 'hotel', l2: 'cafe', l3: 'vatican', l4: 'vatican', l5: 'taxi', l6: 'train', l7: 'plane', l8: 'plane' };
   const BY_FOOD = { 'Café': 'cafe', 'Helado': 'gelato' };
   const BY_DAY = { vie: 'hotel', sab: 'stpeter', dom: 'colosseum', lun: 'vatican' };
 
