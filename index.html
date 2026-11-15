@@ -439,7 +439,7 @@ function stairPlan(lvl){
   } else {
     o += R(P.hole, 'dash');
     o += L(S.x1-0.1, ym, S.x0+0.22, ym, 'arrow') + `<path d="M${s(S.x0+0.3)} ${s(ym-0.06)} L${s(S.x0+0.2)} ${s(ym)} L${s(S.x0+0.3)} ${s(ym+0.06)}" class="arrow"/>`;
-    o += T((P.hole[0]+P.hole[2])/2, P.hole[3]+0.16, 'LLEGADA ESCALERA', 'lbl');
+    o += T(P.hole[0]+0.05, P.hole[3]+0.16, 'llegada escalera', 'lbl', 0, 'start');
   }
   return o;
 }
@@ -477,7 +477,7 @@ function furniturePlan(it){
       const x0 = P.windows[0][0]-0.05, x1 = P.W-0.02, n = it.closed ? 34 : 48;
       for (let i=1;i<=n;i++){ const x = x0 + (x1-x0)*i/n; d += ` Q${s(x-(x1-x0)/n/2)} ${s(y + (i%2?0.06:-0.06))} ${s(x)} ${s(y)}`; }
       o += `<path d="${d}" class="curtain"/>`;
-      o += T((x0+x1)/2, 0.3, it.closed ? 'Cortina opaca cerrada' : 'Visillo de lino · riel a techo', 'lbl');
+      o += T(3.05, 0.3, it.closed ? 'Cortina opaca cerrada' : 'Visillo de lino', 'lbl');
       break; }
     case 'wardrobe': {
       o += R(it.r, 'pf');
@@ -556,10 +556,10 @@ function planSVG(lvl, mode){
     if (r.name==='Cocina'){ cx = 1.2; cy = 4.55; }
     if (r.name==='Entrada'){ cy = 3.98; }
     if (r.name==='Baño'){ cx = 4.0; cy = 5.05; }
-    if (lvl===1){ cx = 1.0; cy = 0.98; }
+    if (lvl===1){ cx = 3.42; cy = 1.25; }
     const short = r.name==='Entrada' ? 'Entr.' : r.name;
-    o += T(cx, cy, r.name==='Entrada' ? '' : short, 'rname', 0, lvl===1 ? 'start':'middle');
-    o += T(cx, cy+0.17, (lvl ? 'h≥1,50 · ' : '') + fmt(a,1) + ' m²', 'rarea', 0, lvl===1 ? 'start':'middle');
+    o += T(cx, cy, r.name==='Entrada' ? '' : short, 'rname', 0, lvl===1 ? 'end':'middle');
+    o += T(cx, cy+0.17, (lvl ? 'h≥1,50 · ' : '') + fmt(a,1) + ' m²', 'rarea', 0, lvl===1 ? 'end':'middle');
   });
   if (lvl===0){ o += T(2.45, 4.75, 'ENTRADA', 'rname', -90); o += T(2.45, 5.58, '↓ acceso', 'lbl'); }
   // Cotas

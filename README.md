@@ -34,3 +34,11 @@ Las medidas son estimadas (± 15 cm) a partir de las baldosas (~60 × 40 cm), la
 - Hueco de la escalera
 
 Después, edita `P` en `src/app.html` y ejecuta `./build.sh`.
+
+## Vistas
+
+| | |
+|---|---|
+| ![Propuesta](renders/01_maqueta_propuesta_dia.png) | ![Actual de noche](renders/02_maqueta_actual_noche.png) |
+| ![Altillo propuesta](renders/06_altillo_propuesta.png) | ![Cenital Japandi](renders/08_cenital_japandi.png) |
+| ![Plano planta baja](renders/plano_planta_baja.png) | ![Plano altillo](renders/plano_altillo.png) |
